@@ -60,11 +60,15 @@ python prosfda/utils/pseudo_label.py
 ## This will generate pseudo labels and a new csv file named 'self-training.csv', 
 ## you should place the pseudo labels and csv file to the proper path 
 
+## Set the prompt model path, since the learned prompt in the trained PLS model will be used in FAS
+export PROMPT_MODEL_PATH="the trained prompt model path in PLS"
+
 # FAS Using Source Model for Target Domain - BASE1
 prosfda_train --model FAS --gpu 0 --tag BASE1 \
 --log_folder $OUTPUT_FOLDER \
 --batch_size 16 \
 --pretrained_model $OUTPUT_FOLDER/UNet_SourceModel/checkpoints/model_final.model \
+--prompt_model_path $PROMPT_MODEL_PATH\
 --initial_lr 0.001 \
 -r $RIGAPLUS_DATASET_FOLDER \
 --tr_csv $RIGAPLUS_DATASET_FOLDER/$Self_training_csv_path.csv \
