@@ -53,7 +53,7 @@ prosfda_test --model PLS --gpu 0 --tag BASE1 --inference_tag Base1_unlabeled \
 --log_folder $OUTPUT_FOLDER \
 -r $RIGAPLUS_DATASET_FOLDER \
 --pretrained_model $OUTPUT_FOLDER/UNet_SourceModel/checkpoints/model_final.model \
---tr_csv $RIGAPLUS_DATASET_FOLDER/MESSIDOR_Base1_unlabeled.csv
+--ts_csv $RIGAPLUS_DATASET_FOLDER/MESSIDOR_Base1_unlabeled.csv
 
 ## Set the path in prosfda/utils/pseudo_label.py, and run it to generate pseudo labels for the target domain - BASE1
 python prosfda/utils/pseudo_label.py
