@@ -27,6 +27,10 @@ pip install -e .
 export OUTPUT_FOLDER="YOUR OUTPUT FOLDER"
 export RIGAPLUS_DATASET_FOLDER="RIGA+ DATASET FOLDER"
 
+## BinRushed.csv is a merged file of BinRushed_train.csv and BinRushed_test.csv.
+## Same as Magrabia.csv, MESSIDOR_Base1.csv, MESSIDOR_Base2.csv, and MESSIDOR_Base3.csv.
+## Since the intra-domain training/test data splits are not used under our source-free domain adaptation setting.
+
 # Train Source Model
 prosfda_train --model UNet --gpu 0 --tag Source_Model \
 --log_folder $OUTPUT_FOLDER \
@@ -34,9 +38,9 @@ prosfda_train --model UNet --gpu 0 --tag Source_Model \
 -r $RIGAPLUS_DATASET_FOLDER \
 --tr_csv $RIGAPLUS_DATASET_FOLDER/BinRushed.csv \
 $RIGAPLUS_DATASET_FOLDER/Magrabia.csv \
---ts_csv $RIGAPLUS_DATASET_FOLDER/MESSIDOR_Base1_unlabeled.csv \
-$RIGAPLUS_DATASET_FOLDER/MESSIDOR_Base2_unlabeled.csv \
-$RIGAPLUS_DATASET_FOLDER/MESSIDOR_Base3_unlabeled.csv
+--ts_csv $RIGAPLUS_DATASET_FOLDER/MESSIDOR_Base1.csv \
+$RIGAPLUS_DATASET_FOLDER/MESSIDOR_Base2.csv \
+$RIGAPLUS_DATASET_FOLDER/MESSIDOR_Base3.csv
 
 # PLS Using Source Model for Target Domain - BASE1
 prosfda_train --model PLS --gpu 0 --tag BASE1 \
