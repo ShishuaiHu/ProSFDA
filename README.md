@@ -1,4 +1,4 @@
-# :page_facing_up: Prompt Learning based Source-free Domain Adaptation for Medical Image Segmentation (ProSFDA)
+# :page_facing_up: Source-free Domain Adaptation Using Prompt Learning for Medical Image Segmentation (ProSFDA)
 
 <p align="center"><img src="figures/overview.png" width="90%"></p>
 
