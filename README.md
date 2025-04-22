@@ -81,6 +81,47 @@ prosfda_train --model FAS --gpu 0 --tag BASE1 \
 # For other target domains, you can run the commands similar to the above commands for BASE1.
 ```
 
+### Hyperparameter Setting
+
+This section summarizes the key hyperparameter configurations used in our implementation. The settings differ slightly between the PLS and FAS variants of our method.
+
+#### Common Settings
+- **Framework**: PyTorch  
+- **GPU**: Single NVIDIA 2080Ti  
+- **Batch size**: 16  
+- **Input size**:
+  - OC/OD segmentation: `512 × 512`  
+  - GM/WM segmentation: `128 × 128`  
+- **Preprocessing**:
+  - RIGA+: Center crop to `800 × 800`, then resize to `512 × 512`  
+  - SCGM: Resample to `0.25 mm × 0.25 mm` in-plane resolution, then center crop to `128 × 128`  
+- **Optimizer**: SGD with momentum `0.99`  
+- **Learning rate schedule**: Polynomial decay  
+  - `lr = lr_0 × (1 - t / T)^0.9`  
+  - `T = 100` epochs  
+
+---
+
+#### 🔵 PLS
+- **Initial learning rate**: `0.01`  
+- **Data augmentation**: None  
+- **Loss weight**:  
+  - `α = 0.01` for style-aware loss `𝓛_SA` 
+
+---
+
+#### 🟣 FAS
+- **Initial learning rate**: `0.001`  
+- **Data augmentation**:
+  - Frequency-based style transfer  
+  - Basic augmentations: random cropping, rotation, scaling, flipping, Gaussian noise, and elastic deformation  
+- **Loss weight**:  
+  - `γ = 0.1` for the FAS loss `𝓛_FAS`
+
+---
+
+These settings were used consistently across all domain adaptation experiments. For detailed ablation studies and sensitivity analysis, please refer to the main manuscript.
+
 ### Citation ✏️ 📄
 
 If you find this repo useful for your research, please consider citing the paper as follows:
